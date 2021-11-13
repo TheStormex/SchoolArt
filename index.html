@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> The Plasmodium Corporation </title>
+	<!-- <link rel="icon"
+		  type="images/png"
+		  href="images/icon.png" /> -->
+	<link rel="stylesheet"
+		  type="text/css"
+		  href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="title">
+      <h1 id="name" onclick="linkAlert()" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> The Plasmodium Corporation  </h1>
+    </div>
+  	<ul id="menu">
+  		<li class="menuItem" onclick="linkAlert()" id="home" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Home </li>
+  		<li class="menuItem" id="aboutUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </li>
+  		<li class="menuItem" onclick="linkAlert()" id="products" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Products  </li>
+  		<li class="menuItem" onclick="linkAlert()" id="careers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Careers  </li>
+  		<li class="menuItem" onclick="linkAlert()" id="contactUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Contact Us </li>
+    	<li class="menuItem" id="promo"> Promo Code <input type="text" id="codeInput" placeholder="Get a discount!"> <button type="button" onclick="enterCode()"> Enter </button> </li>
+  	</ul>
+
+  	<div id="article">
+  		<h1 id="pageName" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </h1>
+      <div id="companyDiv" class="blue">
+        <span class="imageSpan">
+          <img src="images/building.png">
+        </span>
+        <span class="textSpan">
+    		<h2 id="company" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Company </h2>
+        <p id="company1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+    			We are Plasmodium, a team of talented, passionate, and dedicated individuals working together to help better the world.
+    		</p>
+        <p id="company2" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          Here at Plasmodium, we pride ourselves on own high-quality products and services in all industries we have the privilege of working with.
+        </p>
+        <p id="company3" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          We deliver high speed Internet, push the boundaries of science, supply affordable energy to power the homes of many, and expedite online browsing experiences of all our customers by crafting a unique space just for them.
+        </p>
+        </span>
+      </div>
+      <div id="truthDiv" class="white">
+        <span class="textSpan">
+        <h2 id="truth" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Truth </h2>
+        <p id="truth1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          Recently, there has been some rumors surrounding our business practices. We assure you that these are nothing but misinformation. Rest assured, our team of lawyers are working day and night to fight off these baseless accusations so that everyone can see us once again as the positive force helping humanity move forward.
+        </p>
+        </span>
+        <span class="imageSpan">
+          <img src="images/news.png">
+        </span>
+      </div>
+      <div class="blue">
+        <span class="imageSpan">
+          <img src="images/team.png">
+        </span>
+        <span class="textSpan">
+        <h2 id="team" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Team </h2>
+        <p id="team1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          To ensure the highest quality of service, we at Plasmodium work with only those who have a burning passion for betterment just like ourselves. All our staff members work tirelessly to uphold our core values of quality and growth.
+        </p>
+        <p id="team2" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          Do you see yourself as a true visionary? Do you have the drive to lead the world to a new era? If so, contact us today! We will be glad to welcome you to our family!
+        </p>
+        </span>
+      </div>
+      <div class="white">
+        <span class="textSpan">
+        <h2 id="promise" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Promise </h2>
+        <p id="promise1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          We make it our duty to provide nothing but the best that money can buy to all our valued customers. Until we receive universally positive reception for our work, we will continue to improve it before releasing it. You can rest assured that if you see our logo and name on anything, you know it is trustworthy.
+        </p>
+        </span>
+        <span class="imageSpan">
+          <img src="images/good.png">
+        </span>
+      </div>
+      <div class="blue">
+        <span class="imageSpan">
+          <img src="images/customer.png">
+        </span>
+        <span class="textSpan">
+        <h2 id="customers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Customers </h2>
+        <p id="customers1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+          The most important people in the world. Without our customers, we wouldn’t be where we are today. Many thanks to all of you! Please take a moment to take a look at the following responses by our many happy customers. We take pride in our work and bringing satisfaction to everyone is our greatest joy!
+        </p>
+        </span>
+      </div>
+      <div id="reception">
+        <table>
+          <tr>
+            <th> <h2 id="buyer1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> A.	B. from Quebec City </h2> </th>
+            <th> <h2 id="buyer2" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> R. P. from Montreal </h2> </th>
+            <th> <h2 id="buyer3" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> O. N. from Toronto </h2> </th>
+          </tr>
+          <tr>
+            <td  class="blue">  <p id="buyer1Speech" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Plasmodium’s Internet is so fast! It never breaks or stutters! </p> </td>
+            <td  class="blue">  <p id="buyer2Speech" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> For as long as I can remember, our home has been heated and cooled by Plasmodium. We don’t think we’ll change anytime soon! </p>  </td>
+            <td  class="blue">  <p id="buyer3Speech" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Ever since I downloaded the Plasmodium extension on my browser, it is like it can read my mind! It is so convenient to always be one click away from whatever is on my mind! </p> </td>
+          </tr>
+        </table>
+    </div>
+      <p id="hack" onclick="clickAlert()" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+        Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! -The Hacktivist
+      </p>
+  	</div>
+  <script>
+    var codeEntered = false;
+
+    var oldText = "old";
+    var oldFont = "old";
+    var oldSize = "old";
+
+    function clickAlert() {
+      alert("Hi, this is Plasmodium IT Support. Please ignore this part. Some hacker is attempting to sabotage our website. It is a glitch that will be resolved soon. Do not believe what it says, hackers could be tricking you into downloading a virus!");
+    }
+    function linkAlert() {
+      alert("Hi, this is Plasmodium IT Support. A glitch is preventing our website's pages from loading. Please wait while we resolve this issue!");
+    }
+    function enterCode() {
+      var value = document.getElementById("codeInput").value;
+      if (value == "verumvisus") {
+        codeEntered = true;
+        alert("Your mouse now reveals the truth, enjoy! ;-) -The Hacktivist");
+      } else {
+        alert("Error: Code Invalid");
+      }
+    }
+
+    function revealText(id) {
+      if (codeEntered == true) {
+        oldText = document.getElementById(id).textContent;
+        oldFont = document.getElementById(id).style.fontFamily;
+        oldSize = document.getElementById(id).style.fontSize;
+        document.getElementById(id).style.cursor = "not-allowed";
+        document.getElementById(id).style.fontFamily= "Times New Roman, Times, serif";
+        document.getElementById(id).style.fontSize = "2em";
+        switch (id) {
+          case "name":
+            document.getElementById(id).innerHTML = "We are a parasite just like our namesake.";
+            break;
+          case "home":
+            document.getElementById(id).innerHTML = "Give";
+            break;
+          case "aboutUs":
+            document.getElementById(id).innerHTML = "Us";
+            break;
+          case "products":
+            document.getElementById(id).innerHTML = "All";
+            break;
+          case "careers":
+            document.getElementById(id).innerHTML = "Your";
+            break;
+          case "contactUs":
+            document.getElementById(id).innerHTML = "Money";
+            break;
+          case "pageName":
+            document.getElementById(id).innerHTML = "A dishonest description to make us look good";
+            break;
+          case "company":
+            document.getElementById(id).innerHTML = "How we do our exploitations";
+            break;
+          case "company1":
+            document.getElementById(id).innerHTML = "We are Plasmodium, cabal of greedy cronies who seek power and money (what else?) at all costs  to anything but ourselves (obviously!)";
+            break;
+          case "company2":
+            document.getElementById(id).innerHTML = "To achieve this, we buy up or crush any and all competitors in all industries to spread our influence and establish complete control.";
+            break;
+          case "company3":
+            document.getElementById(id).innerHTML = "We fix Internet prices with our ‘competitors (who we own secretly!)’, conduct unethical experiments on animals and ‘volunteers’ to make bioweapons for tyrants (who pay us handsomely!), pollute the air while working against clean energy (that sweet oil tycoon money!), and load up your browsers with spywares and sell your information to our rich partners (what do you think? Nevermind, we already know).";
+            break;
+          case "truth":
+            document.getElementById(id).innerHTML = "A desperate attempt to save our reputation";
+            break;
+          case "truth1":
+            document.getElementById(id).innerHTML = "Recently, our unscrupulous practices have been revealed, oh noez! Please don’t look up any facts or look at the evidence, we still want your money! Keep buying from us and know that our team of lawyers and bribed judges are using every trick in the book (and more!) to silence any negative press!";
+            break;
+          case "team":
+            document.getElementById(id).innerHTML = "Us and our wage slaves";
+            break;
+          case "team1":
+            document.getElementById(id).innerHTML = "To maximise our profits and to prevent any competition from rising up against us, we make sure to attract any and all ambitious workers to expend their energy for us and us only. After using up what they can do, we’ll quickly replace them. This way, we get rid of potential competition since all their life is now gone while constantly enriching ourselves. Aren’t you just dying to work for us? No wait, that was a joke, do not look up ‘worker suicides at Plasmodium’! There are no worker suicides at Plasmodium.";
+            break;
+          case "team2":
+            document.getElementById(id).innerHTML = "Do you think you’re special? Do you believe we actually care about you? Then sell your body and mind to us today! We’ll gladly drain you of all your potentials and ambitions to fuel our own.";
+            break;
+          case "promise":
+            document.getElementById(id).innerHTML = "Cult of personality";
+            break;
+          case "promise1":
+            document.getElementById(id).innerHTML = "Reputation is everything for us (besides money and power). We do all we can to make you like us and want to spend all your money on our products. Our team of psychology experts are always finding new ways to capture your attention and your wallet. We won’t rest until everyone opens their wallet as soon as they see our logo and name.";
+            break;
+          case "customers":
+            document.getElementById(id).innerHTML = "A cherrypicked list of praises";
+            break;
+          case "customers1":
+            document.getElementById(id).innerHTML = "The fools who fell into our honey pot. Look at how they make us look good! This totally means we are great!";
+            break;
+          case "buyer1":
+            document.getElementById(id).innerHTML = "T. D. from Quebec City";
+            break;
+          case "buyer2":
+            document.getElementById(id).innerHTML = "M. J. from Montreal";
+            break;
+          case "buyer3":
+            document.getElementById(id).innerHTML = "W. F. from Toronto";
+            break;
+          case "buyer1Speech":
+            document.getElementById(id).innerHTML = "Plasmodium has bought or bankrupted all other Internet providers in our area. Now we are forced to pay a premium for their services that often slow to a crawl!";
+            break;
+          case "buyer2Speech":
+            document.getElementById(id).innerHTML = "We had a power outage recently and it took a whole day to come back! It turns out this cost us extra! Plasmodium scammed us with their contract!";
+            break;
+          case "buyer3Speech":
+            document.getElementById(id).innerHTML = "I was just talking to my mother about my recent positive pregnancy test. I've told nobody else, and yet the Plasmodium extension has started to push ads for baby products! They must be recording us!";
+            break;
+          case "hack":
+            document.getElementById(id).innerHTML = "You're welcome!";
+            break;
+         default:
+            "oops"
+            break;
+        }
+      }
+    }
+
+    function revertText(id) {
+      if (codeEntered == true) {
+        document.getElementById(id).innerHTML = oldText;
+        document.getElementById(id).style.fontFamily = oldFont;
+        document.getElementById(id).style.fontSize = oldSize;
+      }
+    }
+
+
+  </script>
+  </body>
+</html>
