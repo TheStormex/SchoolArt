@@ -119,6 +119,7 @@
     var oldText = "old";
     var oldFont = "old";
     var oldSize = "old";
+    var oldColor = "old";
 
     function clickAlert() {
       alert("Hi, this is Plasmodium IT Support. Please ignore this part. Some hacker is attempting to sabotage our website. It is a glitch that will be resolved soon. Do not believe what it says, hackers could be tricking you into downloading a virus!");
@@ -141,9 +142,11 @@
         oldText = document.getElementById(id).textContent;
         oldFont = document.getElementById(id).style.fontFamily;
         oldSize = document.getElementById(id).style.fontSize;
+        oldColor =  document.getElementById(id).style.color;
         document.getElementById(id).style.cursor = "not-allowed";
         document.getElementById(id).style.fontFamily= "Times New Roman, Times, serif";
         document.getElementById(id).style.fontSize = "2em";
+        document.getElementById(id).style.color = "#000000";
         switch (id) {
           case "name":
             document.getElementById(id).innerHTML = "We are a parasite just like our namesake.";
@@ -238,6 +241,7 @@
         document.getElementById(id).innerHTML = oldText;
         document.getElementById(id).style.fontFamily = oldFont;
         document.getElementById(id).style.fontSize = oldSize;
+        document.getElementById(id).style.color = oldColor;
       }
     }
 
