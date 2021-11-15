@@ -103,7 +103,7 @@ input{
 
 img {
 	margin: 2%;
-	box-shadow: 3px 3px 2px grey;
+	box-shadow: 5px 5px 3px grey;
 	max-width: 100%;
 	object-fit: fill;
 }
