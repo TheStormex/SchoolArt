@@ -33,7 +33,7 @@
   		<h1 id="pageName" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </h1>
       <div id="companyDiv" class="blue">
         <span class="imageSpan">
-          <img src="images/building.png">
+          <img id="companyImage" src="images/building.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
     		<h2 id="company" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Company </h2>
@@ -56,12 +56,12 @@
         </p>
         </span>
         <span class="imageSpan">
-          <img src="images/news.png">
+          <img id="truthImage" src="images/news.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
       <div class="blue">
         <span class="imageSpan">
-          <img src="images/team.png">
+          <img id="teamImage" src="images/team.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
         <h2 id="team" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Team </h2>
@@ -81,12 +81,12 @@
         </p>
         </span>
         <span class="imageSpan">
-          <img src="images/good.png">
+          <img id="promiseImage" src="images/good.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
       <div class="blue">
         <span class="imageSpan">
-          <img src="images/customer.png">
+          <img id="customersImage" src="images/customer.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
         <h2 id="customers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Customers </h2>
@@ -120,6 +120,7 @@
     var oldFont = "old";
     var oldSize = "old";
     var oldColor = "old";
+    var oldImage = "old";
 
     function clickAlert() {
       alert("Hi, this is Plasmodium IT Support. Please ignore this part. Some hacker is attempting to sabotage our website. It is a glitch that will be resolved soon. Do not believe what it says, hackers could be tricking you into downloading a virus!");
@@ -236,6 +237,32 @@
       }
     }
 
+    function revealImage(id) {
+      if (codeEntered == true) {
+        oldImage = document.getElementById(id).src;
+        switch (id) {
+          case "companyImage":
+              document.getElementById(id).src = "images/cubicles.png";
+            break;
+          case "truthImage":
+              document.getElementById(id).src = "images/bribe.png";
+            break;
+          case "teamImage":
+              document.getElementById(id).src = "images/owner.png";
+            break;
+          case "promiseImage":
+              document.getElementById(id).src = "images/cult.png";
+            break;
+          case "customersImage":
+              document.getElementById(id).src = "images/sheep.png";
+            break;
+          default:
+            "oops"
+            break;
+        }
+      }
+    }
+
     function revertText(id) {
       if (codeEntered == true) {
         document.getElementById(id).innerHTML = oldText;
@@ -243,6 +270,10 @@
         document.getElementById(id).style.fontSize = oldSize;
         document.getElementById(id).style.color = oldColor;
       }
+    }
+
+    function revertImage(id) {
+        document.getElementById(id).src = oldImage;
     }
 
 
