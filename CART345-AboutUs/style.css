@@ -33,7 +33,7 @@ body {
 	text-align: center;
 	text-decoration: none;
 	font-size:2em;
-	margin: 1%;	
+	margin: 1%;
 	margin-left: 3.5%;
 	margin-right: 3.5%;
 	padding: 0.5%;
@@ -91,7 +91,7 @@ button {
 
 button:hover {
 	background-color: #FFFFFF;
-	color: #000000	
+	color: #000000
 }
 
 input{
@@ -122,15 +122,6 @@ h2 {
 	font-size: 3em;
 }
 
-a {
-	text-decoration: none;
-	color: #0000FF;
-}
-
-a:hover {
-	color: #111111;
-}
-
 .textSpan {
 	display: inline-block;
 	width: 45%;
@@ -142,7 +133,7 @@ a:hover {
 }
 
 .menuItem:hover {
-	background-color: #000000;
+	background-color: #0080FF;
 	cursor: pointer;
 }
 
