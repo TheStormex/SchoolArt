@@ -18,20 +18,28 @@
   </head>
 
   <body>
-    <div id="title">
-      <h1 id="name" onclick="linkAlert()" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">  </h1>
+    <div id="header">
+      <span id="title" title="The Plasmodium Corporation">
+        <img src="images/logo.png" id="name" onclick="linkAlert()">
+      </span>
+      <span id="menuBar">
+    	<ul id="menu">
+    		<li class="menuItem" onclick="linkAlert()" id="home" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Home </li>
+    		<li class="menuItem" id="aboutUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </li>
+    		<li class="menuItem" onclick="linkAlert()" id="products" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Products  </li>
+    		<li class="menuItem" onclick="linkAlert()" id="careers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Careers  </li>
+    		<li class="menuItem" onclick="linkAlert()" id="contactUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Contact Us </li>
+      	<li class="menuItem" id="promo"> Promo Code <input type="text" id="codeInput" placeholder="Get a discount!"> <button type="button" onclick="enterCode()"> Enter </button> </li>
+    	</ul>
+      </span>
     </div>
-  	<ul id="menu">
-  		<li class="menuItem" onclick="linkAlert()" id="home" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Home </li>
-  		<li class="menuItem" id="aboutUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </li>
-  		<li class="menuItem" onclick="linkAlert()" id="products" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Products  </li>
-  		<li class="menuItem" onclick="linkAlert()" id="careers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Careers  </li>
-  		<li class="menuItem" onclick="linkAlert()" id="contactUs" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Contact Us </li>
-    	<li class="menuItem" id="promo"> Promo Code <input type="text" id="codeInput" placeholder="Get a discount!"> <button type="button" onclick="enterCode()"> Enter </button> </li>
-  	</ul>
-
   	<div id="article">
   		<h1 id="pageName" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </h1>
+      <div id="hackDiv">
+        <p id="hack" onclick="clickAlert()" onmouseover="revealText(this.id)"  onmouseout="revertText(this.id)">
+          Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! -The Hacktivist
+        </p>
+      </div>
       <div id="companyDiv" class="blue">
         <span class="imageSpan">
           <img id="companyImage" src="images/building.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
@@ -109,18 +117,12 @@
             <td  class="blue" >  <p id="buyer3Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Ever since I downloaded the Plasmodium extension on my browser, it is like it can read my mind! It is so convenient to always be one click away from whatever is on my mind! </p> </td>
           </tr>
         </table>
-    </div>
-      <p id="hack" onclick="clickAlert()" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
-        Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! -The Hacktivist
-      </p>
+      </div>
   	</div>
   <script>
     var codeEntered = false;
 
     var oldText = "old";
-    var oldFont = "old";
-    var oldSize = "old";
-    var oldColor = "old";
     var oldImage = "images/building.png";
 
     function clickAlert() {
@@ -142,13 +144,7 @@
     function revealText(id) {
       if (codeEntered == true) {
         oldText = document.getElementById(id).textContent;
-        oldFont = document.getElementById(id).style.fontFamily;
-        oldSize = document.getElementById(id).style.fontSize;
-        oldColor =  document.getElementById(id).style.color;
         document.getElementById(id).style.cursor = "not-allowed";
-        document.getElementById(id).style.fontFamily= "Times New Roman, Times, serif";
-        document.getElementById(id).style.fontSize = "2em";
-        document.getElementById(id).style.color = "#000000";
         switch (id) {
           case "name":
             document.getElementById(id).innerHTML = "We are a parasite just like our namesake.";
@@ -230,6 +226,7 @@
             break;
           case "hack":
             document.getElementById(id).innerHTML = "You're welcome!";
+            document.getElementById("hackDiv").style.opacity = "100%";
             break;
          default:
             console.log("oops");
@@ -269,9 +266,10 @@
     function revertText(id) {
       if (codeEntered == true) {
         document.getElementById(id).innerHTML = oldText;
-        document.getElementById(id).style.fontFamily = oldFont;
-        document.getElementById(id).style.fontSize = oldSize;
-        document.getElementById(id).style.color = oldColor;
+        if (id == "hack") {
+          var toRemove = document.getElementById('hackDiv');
+          toRemove.remove();
+        }
       }
     }
 
