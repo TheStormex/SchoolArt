@@ -49,42 +49,36 @@
       </div>
       <div id="companyDiv" class="blue">
         <span class="imageSpan">
-          <img id="companyImage" src="images/building.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
+          <img id="companyImage" src="images/buildingEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
     		<h2 id="company" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Company </h2>
-        <p id="company1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
-    			We are Plasmodium, a team of talented, passionate, and dedicated individuals working together to help better the world.
+        <p id="companyText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+    			We are Plasmodium, a team of dedicated individuals working together to help better the world.
+          We pride ourselves on own high-quality products and services in all industries we have the privilege of working with.
+          We deliver high speed Internet, push the boundaries of science, power the homes of many, and craft a unique online experiences for all our customers.
     		</p>
-        <p id="company2" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
-          Here at Plasmodium, we pride ourselves on own high-quality products and services in all industries we have the privilege of working with.
-        </p>
-        <p id="company3" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
-          We deliver high speed Internet, push the boundaries of science, supply affordable energy to power the homes of many, and expedite online browsing experiences of all our customers by crafting a unique space just for them.
-        </p>
         </span>
       </div>
       <div id="truthDiv" class="white">
         <span class="textSpan">
         <h2 id="truth" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Truth </h2>
-        <p id="truth1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+        <p id="truthText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
           Recently, there has been some rumors surrounding our business practices. We assure you that these are nothing but misinformation. Rest assured, our team of lawyers are working day and night to fight off these baseless accusations so that everyone can see us once again as the positive force helping humanity move forward.
         </p>
         </span>
         <span class="imageSpan">
-          <img id="truthImage" src="images/news.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
+          <img id="truthImage" src="images/newsEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
       <div class="blue">
         <span class="imageSpan">
-          <img id="teamImage" src="images/team.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
+          <img id="teamImage" src="images/teamEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
         <h2 id="team" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Team </h2>
-        <p id="team1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+        <p id="teamText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
           To ensure the highest quality of service, we at Plasmodium work with only those who have a burning passion for betterment just like ourselves. All our staff members work tirelessly to uphold our core values of quality and growth.
-        </p>
-        <p id="team2" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
           Do you see yourself as a true visionary? Do you have the drive to lead the world to a new era? If so, contact us today! We will be glad to welcome you to our family!
         </p>
         </span>
@@ -92,21 +86,21 @@
       <div class="white">
         <span class="textSpan">
         <h2 id="promise" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Promise </h2>
-        <p id="promise1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+        <p id="promiseText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
           We make it our duty to provide nothing but the best that money can buy to all our valued customers. Until we receive universally positive reception for our work, we will continue to improve it before releasing it. You can rest assured that if you see our logo and name on anything, you know it is trustworthy.
         </p>
         </span>
         <span class="imageSpan">
-          <img id="promiseImage" src="images/good.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
+          <img id="promiseImage" src="images/goodEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
       <div class="blue">
         <span class="imageSpan">
-          <img id="customersImage" src="images/customer.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
+          <img id="customersImage" src="images/customerEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
         <span class="textSpan">
         <h2 id="customers" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Customers </h2>
-        <p id="customers1" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
+        <p id="customersText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
           The most important people in the world. Without our customers, we wouldn’t be where we are today. Many thanks to all of you! Please take a moment to take a look at the following responses by our many happy customers. We take pride in our work and bringing satisfaction to everyone is our greatest joy!
         </p>
         </span>
@@ -130,6 +124,9 @@
     var codeEntered = false;
 
     var oldText = "old";
+    var oldFont = "old";
+    var oldSize = "old";
+    var oldColor = "old";
     var oldImage = "images/building.png";
 
     function clickAlert() {
@@ -151,7 +148,13 @@
     function revealText(id) {
       if (codeEntered == true) {
         oldText = document.getElementById(id).textContent;
+        oldFont = document.getElementById(id).style.fontFamily;
+        oldSize = document.getElementById(id).style.fontSize;
+        oldColor =  document.getElementById(id).style.color;
         document.getElementById(id).style.cursor = "not-allowed";
+        document.getElementById(id).style.fontFamily= "Times New Roman, Times, serif";
+        document.getElementById(id).style.fontSize = "2em";
+        document.getElementById(id).style.color = "#000000";
         switch (id) {
           case "name":
             document.getElementById(id).innerHTML = "We are a parasite just like our namesake.";
@@ -175,42 +178,33 @@
             document.getElementById(id).innerHTML = "A dishonest description to make us look good";
             break;
           case "company":
-            document.getElementById(id).innerHTML = "How we do our exploitations";
+            document.getElementById(id).innerHTML = "How we exploit";
             break;
-          case "company1":
-            document.getElementById(id).innerHTML = "We are Plasmodium, cabal of greedy cronies who seek power and money (what else?) at all costs  to anything but ourselves (obviously!)";
-            break;
-          case "company2":
-            document.getElementById(id).innerHTML = "To achieve this, we buy up or crush any and all competitors in all industries to spread our influence and establish complete control.";
-            break;
-          case "company3":
-            document.getElementById(id).innerHTML = "We fix Internet prices with our ‘competitors (who we own secretly!)’, conduct unethical experiments on animals and ‘volunteers’ to make bioweapons for tyrants (who pay us handsomely!), pollute the air while working against clean energy (that sweet oil tycoon money!), and load up your browsers with spywares and sell your information to our rich partners (what do you think? Nevermind, we already know).";
+          case "companyText":
+            document.getElementById(id).innerHTML = "We are Plasmodium, cabal of greedy cronies who seek power and money (what else?) at all costs  to anything but ourselves (obviously!) To achieve this, we buy up or crush any and all competitors in all industries to spread our influence and establish complete control. We fix Internet prices with our ‘competitors (who we own secretly!)’, conduct unethical experiments on animals and ‘volunteers’ to make bioweapons for tyrants (who pay us handsomely!), pollute the air while working against clean energy (that sweet oil tycoon money!), and load up your browsers with spywares and sell your information to our rich partners (what do you think? Nevermind, we already know).";
             break;
           case "truth":
             document.getElementById(id).innerHTML = "A desperate attempt to save our reputation";
             break;
-          case "truth1":
+          case "truthText":
             document.getElementById(id).innerHTML = "Recently, our unscrupulous practices have been revealed, oh noez! Please don’t look up any facts or look at the evidence, we still want your money! Keep buying from us and know that our team of lawyers and bribed judges are using every trick in the book (and more!) to silence any negative press!";
             break;
           case "team":
             document.getElementById(id).innerHTML = "Us and our wage slaves";
             break;
-          case "team1":
-            document.getElementById(id).innerHTML = "To maximise our profits and to prevent any competition from rising up against us, we make sure to attract any and all ambitious workers to expend their energy for us and us only. After using up what they can do, we’ll quickly replace them. This way, we get rid of potential competition since all their life is now gone while constantly enriching ourselves. Aren’t you just dying to work for us? No wait, that was a joke, do not look up ‘worker suicides at Plasmodium’! There are no worker suicides at Plasmodium.";
-            break;
-          case "team2":
-            document.getElementById(id).innerHTML = "Do you think you’re special? Do you believe we actually care about you? Then sell your body and mind to us today! We’ll gladly drain you of all your potentials and ambitions to fuel our own.";
+          case "teamText":
+            document.getElementById(id).innerHTML = "To maximise our profits and to prevent any competition from rising up against us, we make sure to attract any and all ambitious workers to expend their energy for us and us only. After using up what they can do, we’ll quickly replace them. This way, we get rid of potential competition since all their life is now gone while constantly enriching ourselves. Aren’t you just dying to work for us? No wait, that was a joke, do not look up ‘worker suicides at Plasmodium’! There are no worker suicides at Plasmodium. Do you think you’re special? Do you believe we actually care about you? Then sell your body and mind to us today! We’ll gladly drain you of all your potentials and ambitions to fuel our own.";
             break;
           case "promise":
             document.getElementById(id).innerHTML = "Cult of personality";
             break;
-          case "promise1":
+          case "promiseText":
             document.getElementById(id).innerHTML = "Reputation is everything for us (besides money and power). We do all we can to make you like us and want to spend all your money on our products. Our team of psychology experts are always finding new ways to capture your attention and your wallet. We won’t rest until everyone opens their wallet as soon as they see our logo and name.";
             break;
           case "customers":
             document.getElementById(id).innerHTML = "A cherrypicked list of praises";
             break;
-          case "customers1":
+          case "customersText":
             document.getElementById(id).innerHTML = "The fools who fell into our honey pot. Look at how they make us look good! This totally means we are great!";
             break;
           case "buyer1":
@@ -249,19 +243,19 @@
         console.log(oldImage);
         switch (id) {
           case "companyImage":
-              document.getElementById(id).src = "images/cubicles.png";
+              document.getElementById(id).src = "images/cubiclesEdit.png";
             break;
           case "truthImage":
-              document.getElementById(id).src = "images/bribe.png";
+              document.getElementById(id).src = "images/bribeEdit.png";
             break;
           case "teamImage":
-              document.getElementById(id).src = "images/owner.png";
+              document.getElementById(id).src = "images/ownerEdit.png";
             break;
           case "promiseImage":
-              document.getElementById(id).src = "images/cult.png";
+              document.getElementById(id).src = "images/cultEdit.png";
             break;
           case "customersImage":
-              document.getElementById(id).src = "images/sheep.png";
+              document.getElementById(id).src = "images/sheepEdit.png";
             break;
           default:
             console.log("oops");
@@ -273,6 +267,9 @@
     function revertText(id) {
       if (codeEntered == true) {
         document.getElementById(id).innerHTML = oldText;
+        document.getElementById(id).style.fontFamily = oldFont;
+        document.getElementById(id).style.fontSize = oldSize;
+        document.getElementById(id).style.color = oldColor;
         if (id == "hack") {
           var toRemove = document.getElementById('hackDiv');
           toRemove.remove();
