@@ -169,12 +169,26 @@ h2 {
 	background-color: #DDDDDD;
 	position: sticky;
   top: 50%;
-	opacity: 8%;
+	opacity: 40%;
 }
 #hack {
 	font-family: "Times New Roman", Times, serif;
 	font-size: 2em;
 	color: #000000;
 	text-align: center;
+	position: relative;
 	cursor: wait;
+}
+
+footer {
+	text-align: center;
+	margin-top: 1%;
+	background-color: #0080FF;
+	color: #FFFFFF;
+}
+
+em {
+	text-align: center;
+	font-size: 2em;
+	text-decoration: none;
 }
