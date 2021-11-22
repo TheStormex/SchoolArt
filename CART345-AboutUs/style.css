@@ -111,7 +111,7 @@ button {
 
 button:hover {
 	background-color: #FFFFFF;
-	color: #000000
+	color: #000000;
 }
 
 input{
@@ -169,8 +169,10 @@ h2 {
 	background-color: #DDDDDD;
 	position: sticky;
   top: 50%;
-	opacity: 40%;
+	opacity: 5%;
+	z-index: 1000;
 }
+
 #hack {
 	font-family: "Times New Roman", Times, serif;
 	font-size: 2em;
@@ -178,6 +180,16 @@ h2 {
 	text-align: center;
 	position: relative;
 	cursor: wait;
+}
+
+#hack:hover {
+  background-color: #0080FF;
+	color: #000000;
+	opacity: 100%;
+}
+
+::selection {
+	background-color: #BBBBBB;
 }
 
 footer {
