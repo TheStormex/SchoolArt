@@ -17,9 +17,11 @@ body {
 
 #title {
 	display: inline-block;
+	font-family: "Times New Roman", Times, serif;
 	width: 10%;
 	margin-left: 4%;
 	text-align: left;
+	font-size: 2vw;
 }
 
 #menuBar{
@@ -32,18 +34,19 @@ body {
 	font-size: 1.2vw;
 }
 
+.sections {
+	text-align: center;
+	position: relative;
+}
+
 .blue {
 	background-color: #0080FF;
 	color: #FFFFFF;
-	text-align: center;
-	position: relative;
 }
 
 .white {
 	background-color: #FFFFFF;
 	color: #000000;
-	text-align: center;
-	position: relative;
 }
 
 .buyerBox {

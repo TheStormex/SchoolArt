@@ -27,7 +27,7 @@
   <body>
     <div id="header">
       <span id="title" title="The Plasmodium Corporation">
-        <img src="images/logo.png" id="name" onclick="linkAlert()">
+        <img src="images/logo.png" id="name" onclick="linkAlert()" onmouseover="revealImage(this.id)">
       </span>
       <span id="menuBar">
     	<ul id="menu">
@@ -47,7 +47,7 @@
           Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! Click this to copy the code! -The Hacktivist
         </p>
       </div>
-      <div id="companyDiv" class="blue">
+      <div id="companyDiv" class="blue" class="sections" onmouseover="removeBlue(this.id)">
         <span class="imageSpan">
           <img id="companyImage" src="images/buildingEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
@@ -60,7 +60,7 @@
     		</p>
         </span>
       </div>
-      <div id="truthDiv" class="white">
+      <div id="truthDiv" class="white" class="sections">
         <span class="textSpan">
         <h2 id="truth" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Truth </h2>
         <p id="truthText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
@@ -71,7 +71,7 @@
           <img id="truthImage" src="images/newsEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
-      <div class="blue">
+      <div id="teamDiv" class="blue" class="sections" onmouseover="removeBlue(this.id)">
         <span class="imageSpan">
           <img id="teamImage" src="images/teamEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
@@ -83,7 +83,7 @@
         </p>
         </span>
       </div>
-      <div class="white">
+      <div id="promiseDiv" class="white" class="sections">
         <span class="textSpan">
         <h2 id="promise" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Our Promise </h2>
         <p id="promiseText" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)">
@@ -94,7 +94,7 @@
           <img id="promiseImage" src="images/goodEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
       </div>
-      <div class="blue">
+      <div id="customersDiv" class="blue" class="sections" onmouseover="removeBlue(this.id)">
         <span class="imageSpan">
           <img id="customersImage" src="images/customerEdit.png" onmouseover="revealImage(this.id)" onmouseout="revertImage(this.id)">
         </span>
@@ -113,16 +113,16 @@
             <th> <h2 id="buyer3" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> O. N. from Toronto </h2> </th>
           </tr>
           <tr>
-            <td  class="blue" >  <p id="buyer1Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Plasmodium’s Internet is so fast! It never breaks or stutters! </p> </td>
-            <td  class="blue" >  <p id="buyer2Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> For as long as I can remember, our home has been heated and cooled by Plasmodium. We don’t think we’ll change anytime soon! </p>  </td>
-            <td  class="blue" >  <p id="buyer3Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Ever since I downloaded the Plasmodium extension on my browser, it is like it can read my mind! It is so convenient to always be one click away from whatever is on my mind! </p> </td>
+            <td id="reception1" class="blue" onmouseover="removeBlue(this.id)">  <p id="buyer1Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Plasmodium’s Internet is so fast! It never breaks or stutters! </p> </td>
+            <td id="reception2" class="blue" onmouseover="removeBlue(this.id)">  <p id="buyer2Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> For as long as I can remember, our home has been heated and cooled by Plasmodium. We don’t think we’ll change anytime soon! </p>  </td>
+            <td id="reception3" class="blue" onmouseover="removeBlue(this.id)">  <p id="buyer3Speech" class="buyerBox" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> Ever since I downloaded the Plasmodium extension on my browser, it is like it can read my mind! It is so convenient to always be one click away from whatever is on my mind! </p> </td>
           </tr>
         </table>
       </div>
   	</div>
     <footer>
-      <em>
-        'About Us' is an interactive art project by Che Tan, Concordia University 2021
+      <em id="end" onmouseover="revealText(this.id)">
+        Copyright The Plasmodium Corporation 2021
       </em>
     </footer>
   <script>
@@ -145,8 +145,17 @@
       if (value == "verumvisus") {
         codeEntered = true;
         alert("Your mouse now reveals the truth, enjoy! ;-) -The Hacktivist");
+        var toRemove = document.getElementById('promo');
+        toRemove.remove();
       } else {
         alert("Error: Code Invalid");
+      }
+    }
+
+    function removeBlue(id) {
+      if (codeEntered == true) {
+        var theDiv = document.getElementById(id);
+        theDiv.classList.remove("blue");
       }
     }
 
@@ -186,19 +195,19 @@
             document.getElementById(id).innerHTML = "How we exploit";
             break;
           case "companyText":
-            document.getElementById(id).innerHTML = "We are Plasmodium, cabal of greedy cronies who seek power and money at all costs. We fix Internet prices with our ‘competitors’, conduct unethical experiments to make bioweapons for tyrants, pollute the air while working against clean energy, and load up your browsers with spywares. What do you think? Nevermind, we already know.";
+            document.getElementById(id).innerHTML = "We are Plasmodium, a cabal of greedy cronies who seek power and money at all costs. We fix Internet prices with our ‘competitors’, conduct unethical experiments to make bioweapons for tyrants, pollute the planet, and load up your browsers with spywares. What do you think? Nevermind, we already know.";
             break;
           case "truth":
             document.getElementById(id).innerHTML = "A desperate attempt to save our reputation";
             break;
           case "truthText":
-            document.getElementById(id).innerHTML = "Recently, our unscrupulous practices have been revealed, oh noez! Please don’t look up any facts or look at the evidence, we still want your money! Keep buying from us and know that our team of lawyers and bribed judges are using every trick in the book to silence any negative press!";
+            document.getElementById(id).innerHTML = "Recently, our unscrupulous practices have been revealed, drat! Please don’t look up any facts or look at the evidence, we still want your money! Keep buying from us and know that our team of lawyers and bribed judges are using every trick in the book to silence any negative press!";
             break;
           case "team":
             document.getElementById(id).innerHTML = "Us and our wage slaves";
             break;
           case "teamText":
-            document.getElementById(id).innerHTML = "We make sure to attract any and all ambitious workers to expend their energy for us and us only. Aren’t you just dying to work for us? No wait, that was a joke, do not look up ‘worker suicides at Plasmodium’! There are no worker suicides at Plasmodium. Do you believe we actually care about you? Then sell your body and mind to us today! We’ll gladly drain you of all your potentials and ambitions to fuel our own.";
+            document.getElementById(id).innerHTML = "We make sure to drain all our workers' energy for us and us only. Aren’t you just dying to work for us? No wait, that was a joke, do not look up ‘worker suicides at Plasmodium’! There are no worker suicides at Plasmodium. Do you believe we actually care about you? Then sell your body and mind to us today!";
             break;
           case "promise":
             document.getElementById(id).innerHTML = "Cult of personality";
@@ -234,6 +243,10 @@
             document.getElementById(id).innerHTML = "You're welcome!";
             document.getElementById("hackDiv").style.opacity = "100%";
             break;
+          case "end":
+            document.getElementById(id).innerHTML = "'About Us' is an interactive art project by Che Tan, Concordia University 2021";
+            document.getElementById(id).style.color = "#FFFFFF";
+            break;
          default:
             console.log("oops");
             break;
@@ -247,6 +260,10 @@
         document.getElementById(id).style.cursor = "not-allowed";
         console.log(oldImage);
         switch (id) {
+          case "name":
+              document.getElementById(id).src = "none.png";
+              document.getElementById(id).alt = "We are a parasite just like our namesake.";
+            break;
           case "companyImage":
               document.getElementById(id).src = "images/cubiclesEdit.png";
             break;
@@ -271,10 +288,10 @@
 
     function revertText(id) {
       if (codeEntered == true) {
-        document.getElementById(id).innerHTML = oldText;
-        document.getElementById(id).style.fontFamily = oldFont;
-        document.getElementById(id).style.fontSize = oldSize;
-        document.getElementById(id).style.color = oldColor;
+        // document.getElementById(id).innerHTML = oldText;
+        // document.getElementById(id).style.fontFamily = oldFont;
+        // document.getElementById(id).style.fontSize = oldSize;
+        // document.getElementById(id).style.color = oldColor;
         if (id == "hack") {
           var toRemove = document.getElementById('hackDiv');
           toRemove.remove();
@@ -284,7 +301,7 @@
 
     function revertImage(id) {
       if (codeEntered == true) {
-        document.getElementById(id).src = oldImage;
+        // document.getElementById(id).src = oldImage;
       }
     }
 
