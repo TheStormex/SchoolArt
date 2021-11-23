@@ -44,7 +44,7 @@
   		<h1 id="pageName" onmouseover="revealText(this.id)" onmouseout="revertText(this.id)"> About Us </h1>
       <div id="hackDiv">
         <p id="hack" onclick="clickAlert()" onmouseover="revealText(this.id)"  onmouseout="revertText(this.id)">
-          Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! -The Hacktivist
+          Hey you! Don’t be fooled! Enter ‘verumvisus’ in the promo code to see the truth! Click this to copy the code! -The Hacktivist
         </p>
       </div>
       <div id="companyDiv" class="blue">
@@ -135,6 +135,7 @@
 
     function clickAlert() {
       alert("Hi, this is Plasmodium IT Support. Please ignore this part. Some hacker is attempting to sabotage our website. It is a glitch that will be resolved soon. Do not believe what it says, hackers could be tricking you into downloading a virus!");
+      navigator.clipboard.writeText("verumvisus");
     }
     function linkAlert() {
       alert("Hi, this is Plasmodium IT Support. A glitch is preventing our website's pages from loading. Please wait while we resolve this issue!");

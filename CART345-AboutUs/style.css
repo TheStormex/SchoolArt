@@ -47,7 +47,7 @@ body {
 }
 
 .buyerBox {
-	border-radius: 20px;
+	border-radius: 1vw;
 }
 
 .menuItem {
@@ -82,9 +82,9 @@ td {
 }
 
 p {
-	margin-left:20px;
-	margin-right:20px;
-	font-size: 1.1vw;
+	margin-left:2vw;
+	margin-right:2vw;
+	font-size: 1vw;
 	padding: 1%;
 	text-align: justify;
 	line-height: 150%;
@@ -107,7 +107,7 @@ button {
 	transition-duration: 0.4s;
 	border: 1px solid #0080FF;
 	font-size: 1vw;
-	border-radius: 20px;
+	border-radius: 0.5vw;
 }
 
 button:hover {
