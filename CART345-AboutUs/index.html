@@ -138,7 +138,9 @@
       navigator.clipboard.writeText("verumvisus");
     }
     function linkAlert() {
-      alert("Hi, this is Plasmodium IT Support. A glitch is preventing our website's pages from loading. Please wait while we resolve this issue!");
+      if (codeEntered == false) {
+        alert("Hi, this is Plasmodium IT Support. A glitch is preventing our website's pages from loading. Please wait while we resolve this issue!");
+      }
     }
     function enterCode() {
       var value = document.getElementById("codeInput").value;
@@ -240,7 +242,7 @@
             document.getElementById(id).innerHTML = "I was just talking to my mother about my recent positive pregnancy test. I've told nobody else, and yet the Plasmodium extension has started to push ads for baby products! They must be recording us!";
             break;
           case "hack":
-            document.getElementById(id).innerHTML = "You're welcome!";
+            document.getElementById(id).innerHTML = "You're welcome! Now tear this page of lies apart!";
             document.getElementById("hackDiv").style.opacity = "100%";
             break;
           case "end":
