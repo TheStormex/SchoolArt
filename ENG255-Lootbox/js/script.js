@@ -13,6 +13,7 @@ secrets become revealed!
 let gameScreen;
 
 // variables:
+// player stats
 let playerLevel = 1;
 let playerExp = 0;
 let happiness = 100;
@@ -21,6 +22,7 @@ let gems = 0;
 let hunger = 100;
 let luckOriginal = 1;
 let luck = 1;
+// shop stats
 let foodCount = [0, 0, 0, 0, 0];
 let coffeeCount = [0, 0, 0, 0, 0];
 let happyJuiceCount = [0, 0, 0, 0, 0];
@@ -39,17 +41,34 @@ let lotteryPrices = [5, 12, 30, 50, 65];
 // Coworker relationship points (for each coworker): all start at 1, end at 10, once `0, gets condition to start petition.
 // Addiction points: start at 100, calculated to how much happiness is lost every second. Buying the lootboxes increase this, buying the expensive upgrades of cooking skills, attending hobby groups, help coworkers decrease it. At 0, open the option to
 
-let week = 0;
-let weekPercent = 0;
-let regulationPoints = 0;
-let cookingPoints = 0;
-let hobbyPoints = 0;
+let week = 0; // 15 total, at end of 15th week, end game
+let weekPercent = 0; // when 100, goes to next week
+let regulationPoints = 0; // wins game at 10
+let cookingPoints = 0; // caps out at 5
+let hobbyPoints = 0; // caps out at 5
 
-let workList = [];
+// the current letter to press to proceed (Q W E R T A S D F G)
+let workLetter = 0;
+let workLettersList = [81, 87, 69, 82, 84, 65, 83, 68, 70, 71];
+let employeesList = [];
+let helpList = [];
 
-let newsText = "News text";
+// how much exp gained from working one letter depend on level
+// these are boosted by coffee and happiness points
+let expPerLevel = [10, 8, 6, 4, 2, 1, 1, 1, 1, 1];
 
-let gameEnded = no;
+let newsText = 6;
+let newsTextList = [
+  "At the end of this week, the worst performing employee will be fired.",
+  "Luckily, due to good performance, no one needs ot be fired this time.",
+  "Lootboxes are on sale this week! Support our business and be happy!",
+  "Support our business! Do not support that rediculous peition!",
+  "Keep up the good work! You are bringing joy to all!",
+  "Satisfy your needs today! Lootboxes just a click away!",
+  "Good luck on your first week! Make the boss proud!"
+];
+
+let gameEnded = false;
 // 1 = Regulations; 2 = depression; 3 = unproductive; 4 = starvation; 5 = snake; 6 = better job; 7 = promotion
 let endingType = 0;
 
@@ -64,6 +83,8 @@ function setup() {
   gameScreen = createCanvas(windowWidth, windowHeight);
   gameScreen.style('display', 'block');
   noStroke();
+  // create the 3 other employees
+  new Employee("Mr. A");
 }
 
 function draw() {
@@ -329,6 +350,15 @@ function workWindow() {
   textSize(width/80+height/80);
   textAlign(CENTER, CENTER);
   text("Work", width/2.8, height/3-height/4.2);
+  // draw the rect under the current letter to press
+  fill(255, 200, 0);
+  if (workLetter < 5) {
+    rect(width/4.5+(width/15)*workLetter, height/6, width/18, height/10);
+
+  } else if (workLetter >= 5) {
+    rect(width/4.5, height/3, width/18, height/10);
+  }
+
 }
 
 function helpNeededWindow() {
@@ -407,7 +437,7 @@ function newsWindow() {
   text("News", width/30, height/2.1);
   textSize(width/100+height/100);
   textAlign(LEFT, CENTER);
-  text(newsText, width/12, height/2.1);
+  text(newsTextList[newsText], width/12, height/2.1);
 }
 
 function salesAlert() {
@@ -454,10 +484,12 @@ function windowResized() {
 
 // calculation functions
 
+// calculate the rankings of each employee
 function ranking() {
 
 }
 
+// calculate the numbers for doing work if right key is pressed
 function doWork() {
 
 }
