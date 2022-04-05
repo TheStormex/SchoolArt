@@ -88,24 +88,31 @@ function setup() {
 }
 
 function draw() {
-  // calculate variables
-  ranking();
-  endingCheck();
-  // draw elemnents
-  windowResized();
   background(255);
-  titleWord();
-  shopWindow();
-  workWindow();
-  helpNeededWindow();
-  weekCount();
-  playerStats();
-  leaderboard();
-  gemShop();
-  newsWindow();
-  salesAlert();
-  realSkills();
-  petition();
+  if (gameEnded === false) {
+    // calculate variables
+    ranking();
+    endingCheck();
+    // draw elemnents
+    windowResized();
+    titleWord();
+    shopWindow();
+    workWindow();
+    helpNeededWindow();
+    weekCount();
+    playerStats();
+    leaderboard();
+    gemShop();
+    newsWindow();
+    salesAlert();
+    realSkills();
+    petition();
+    // if clicking buttons, register and do the transaction
+    mousePressed();
+    keyPressed();
+  } else if (gameEnded === true) {
+
+  }
 }
 
 // drawing functions
@@ -489,12 +496,33 @@ function ranking() {
 
 }
 
+// check all buttons, if any is pressed, do one of the following codes
+function mousePressed() {
+  if (mouseX < width && mouseX > 0 && mouseY < height && mouseY > 0) {
+
+  }
+
+}
+
 // calculate the numbers for doing work if right key is pressed
 function doWork() {
 
 }
 
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+  value = 255;
+} else if (keyCode === RIGHT_ARROW) {
+  value = 0;
+}
+  dowork();
+}
+
 function buySomething(cost, thingGained, amountGained) {
+
+}
+
+function doHelpQuest() {
 
 }
 
