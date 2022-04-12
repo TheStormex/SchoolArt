@@ -58,6 +58,9 @@ let regulationPoints = 0; // wins game at 10
 let cookingPoints = 0; // caps out at 5
 let hobbyPoints = 0; // caps out at 5
 
+let bestEmployee = "";
+let worstEmployee = "";
+
 // the current letter to press to proceed (Q W E R T A S D F G)
 let workLetter = 0;
 let workLettersList = [81, 87, 69, 82, 84, 65, 83, 68, 70, 71];
@@ -67,6 +70,10 @@ let helpList = [];
 // how much exp gained from working one letter depend on level
 // these are boosted by coffee and happiness points
 let expPerLevel = [10, 8, 6, 4, 2, 1, 1, 1, 1, 1];
+let moneyPerLevel = [1, 2, 4, 6, 8, 10, 12, 14, 16, 20];
+
+// if drank coffee, how much more work is done per click
+let coffeeBoost = 0;
 
 let newsText = 6;
 let newsTextList = [
@@ -105,7 +112,13 @@ function setup() {
   gameScreen.style('display', 'block');
   noStroke();
   // create the 3 other employees
-  new Employee("Mr. A");
+  let employeeOne = new Employee("Mr. A");
+  employeesList.push(employeeOne);
+  let employeeTwo = new Employee("Mrs. B");
+  employeesList.push(employeeTwo);
+  let employeeThree = new Employee("Ms. C");
+  employeesList.push(employeeThree);
+  console.log(employeesList);
 }
 
 function draw() {
@@ -114,6 +127,7 @@ function draw() {
     // calculate variables
     ranking();
     endingCheck();
+    timeCode();
     // draw elemnents
     windowResized();
     titleWord();
@@ -177,8 +191,8 @@ function draw() {
       textAlign(CENTER, CENTER);
       textSize(width / 30 + height / 30);
       text("Congrats! You got the best ending!", width / 2, height / 4);
-      image(endingImage, width / 4, height - height/4, width / 2, height / 2);
-      image(endingImage2, width -width / 4, height - height/4, width / 2, height / 2);
+      image(endingImage, width / 4, height - height / 4, width / 2, height / 2);
+      image(endingImage2, width - width / 4, height - height / 4, width / 2, height / 2);
     }
   }
 }
@@ -431,9 +445,20 @@ function workWindow() {
     rect(width / 4.5 + (width / 15) * workLetter, height / 6, width / 18, height / 10);
 
   } else if (workLetter >= 5) {
-    rect(width / 4.5, height / 3, width / 18, height / 10);
+    rect(width / 4.5 + (width / 15) * (workLetter - 5), height / 3, width / 18, height / 10);
   }
-
+  fill(0);
+  textSize(width / 30 + height / 30);
+  text("Q", width / 4.5, height / 3 - height / 6);
+  text("W", width / 4.5 + (width / 15), height / 3 - height / 6);
+  text("E", width / 4.5 + (width / 15) * 2, height / 3 - height / 6);
+  text("R", width / 4.5 + (width / 15) * 3, height / 3 - height / 6);
+  text("T", width / 4.5 + (width / 15) * 4, height / 3 - height / 6);
+  text("A", width / 4.5, height / 3);
+  text("S", width / 4.5 + (width / 15), height / 3);
+  text("D", width / 4.5 + (width / 15) * 2, height / 3);
+  text("F", width / 4.5 + (width / 15) * 3, height / 3);
+  text("G", width / 4.5 + (width / 15) * 4, height / 3);
 }
 
 function helpNeededWindow() {
@@ -468,10 +493,12 @@ function playerStats() {
 
 function leaderboard() {
   fill(0);
-  textSize(width / 80 + height / 80);
+  textSize(width / 60 + height / 60);
   textAlign(LEFT, CENTER);
   text("Leaderboard", width - width / 5, height / 4.5);
-  text("1", width - width / 5, height / 3.8);
+  textSize(width / 80 + height / 80);
+  text("1 - " + "name", width - width / 5, height / 3.5);
+  text("Level - " + " EXP  - ", width - width / 5, height / 3.1);
 }
 
 function gemShop() {
@@ -573,27 +600,88 @@ function mousePressed() {
 }
 
 // calculate the numbers for doing work if right key is pressed
-function doWork() {
+// function doWork() {
+//   console.log("work");
+// }
 
-}
-
-function keyPressed() {
-  if (keyCode === LEFT_ARROW) {
-    value = 255;
-  } else if (keyCode === RIGHT_ARROW) {
-    value = 0;
+function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
+  switch (keyCode) {
+    case 81: // Q
+      console.log("81");
+      break;
+    case 87: // W
+      console.log("81");
+      break;
+    case 69: // E
+      console.log("81");
+      break;
+    case 82: // R
+      console.log("81");
+      break;
+    case 84: // T
+      console.log("81");
+      break;
+    case 65: // A
+      console.log("81");
+      break;
+    case 83: // S
+      console.log("81");
+      break;
+    case 68: // D
+      console.log("81");
+      break;
+    case 70: // F
+      console.log("81");
+      break;
+    case 71: // G
+      console.log("81");
+      break;
+    default:
   }
-  dowork();
 }
 
 function buySomething(cost, thingGained, amountGained) {
-
+  money -= cost;
+  switch (thingGained) {
+    case "food":
+      foodCount += amountGained;
+      break;
+    case "coffee":
+      coffeeCount += amountGained;
+      break;
+    case "juice":
+      happyJuiceCount += amountGained;
+      break;
+    case "boost":
+      luckBoostCount += amountGained;
+      break;
+    case "box":
+      lootboxCount += amountGained;
+      break;
+    case "lottery":
+      lotteryCount += amountGained;
+      break;
+    case "gems":
+      gems += amountGained;
+    default:
+  }
 }
 
 function doHelpQuest() {
 
 }
 
-function endingCheck() {
+function timeCode() {
 
+}
+
+function endingCheck() {
+  if (hunger <= 0) {
+    gameEnded = true;
+    endingType = 4;
+  }
+  if (happiness <= 0) {
+    gameEnded = true;
+    endingType = 2;
+  }
 }
