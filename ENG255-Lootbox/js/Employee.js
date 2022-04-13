@@ -1,10 +1,10 @@
 class Employee {
   constructor(name) {
-    this.name = name;
-    this.level = 1;
-    this.exp = 0;
-    this.productivity = 1;
-    this.isAlly = false;
+    // this.name = name;
+    // this.level = 1;
+    // this.exp = 0;
+    // this.productivity = 1;
+    // this.isAlly = false;
   }
   // text("Learn Cooking", width - width / 5, height / 50);
   // text(cookingPrice + "$", width - width / 5, height / 20);

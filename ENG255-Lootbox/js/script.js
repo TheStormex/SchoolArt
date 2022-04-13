@@ -32,16 +32,12 @@ let happiness = 100;
 let money = 0;
 // let gems = 0;
 let hunger = 100;
-let socialPoints = 0; // 100 total
-// let luckOriginal = 1;
-// let luck = 1;
+let socialPoints = 0; // 100 total, more have, slower happiness falls
 // shop stats
 let foodCount = 0;
 let coffeeCount = 0;
 let happyJuiceCount = 0;
-// let luckBoostCount = 0;
 let lootboxCount = 0;
-// let lotteryCount = 0;
 let foodPrice = 18;
 let coffeePrice = 8;
 let happyJuicePrice = 15;
@@ -51,12 +47,19 @@ let lootboxPrice = 10;
 // let cookingPrice = 30;
 let socializePrice = 30;
 
-let coffeeTimer = 0;
-let coffeeCooldown = 10;
+let coffeeUsed = false;
+
 // if drank coffee, how much more work is done per click
 let coffeeBoost = 2;
-// base
+let productivity = 1;
+let productivityBase = 1;
+// how much food gives interm of hunger
 let foodBoost = 20;
+let happyJuiceBoost = 30;
+// each used gives 1 less happiness back
+let happyJuiceUsed = 0;
+let lootboxBought = 0;
+let lootboxOpened = 0;
 
 
 // lootbox
@@ -108,6 +111,8 @@ let happinessTimer = 0;
 let happinessCooldown = 90;
 let weekTimer = 0;
 let weekCooldown = 36;
+let coffeeTimer = 0;
+let coffeeCooldown = 120;
 
 function preload() {
   // load images
@@ -143,12 +148,9 @@ function draw() {
     titleWord();
     shopWindow();
     workWindow();
-    // helpNeededWindow();
     weekCount();
     playerStats();
-    // gemShop();
     newsWindow();
-    // salesAlert();
     realSkills();
     petition();
     framecount++;
@@ -300,17 +302,17 @@ function newsWindow() {
   textSize(width / 100 + height / 100);
   textAlign(LEFT, CENTER);
   // what news should play?
-
+  if (week === 1) {
+    newsText = 6;
+  }
   text(newsTextList[newsText], width / 12, height / 2.1);
 }
 
 function salesAlert() {
-  fill(0);
   textSize(width / 50 + height / 50);
   textAlign(CENTER, CENTER);
-  text("SALES!", width - width / 7, height / 6);
   fill(255, 0, 0);
-  ellipse(width - width / 20, height / 8, width / 20 + height / 20);
+  text("LOOTBOX SALES! Until end of week!", width - width / 7, height / 6);
 }
 
 function realSkills() {
@@ -321,7 +323,7 @@ function realSkills() {
 }
 
 function petition() {
-//  if (socialPoints === 100) {
+  if (socialPoints === 100) {
     fill(200);
     rectMode(CENTER, CENTER);
     rect(width - width / 10, height - height / 2.05, width / 5.5, height / 7);
@@ -334,7 +336,7 @@ function petition() {
     text("Keep consumers addicted for profit", width - width / 10, height - height / 2.1);
     text("Your social circle created a petition", width - width / 10, height - height / 2.2);
     text("to regulate the market", width - width / 10, height - height / 2.3);
-//  }
+  }
 }
 
 function windowResized() {
@@ -353,12 +355,17 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
   }
   if (isWorkKey === true) {
     if (keyCode === workLettersList[workLetter]) {
-      money += moneyPerLevel[playerLevel-1];
-      playerExp += expPerLevel[playerLevel-1];
+      if (coffeeUsed === true) {
+        productivity += coffeeBoost;
+      } else {
+        productivity = productivityBase;
+      }
+      money += (moneyPerLevel[playerLevel - 1]) * productivity;
+      playerExp += (expPerLevel[playerLevel - 1]) * productivity;
       workLetter = round(random(9));
     } else {
       // if work key not the right one, lose
-      money -= moneyPerLevel[playerLevel-1];
+      money -= moneyPerLevel[playerLevel - 1];
       happiness--;
       if (money < 0) {
         money = 0;
@@ -367,8 +374,65 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
   } else {
     // if key is not a work key, do the action
     switch (keyCode) {
-      case 10:
-
+      case 80: // P
+        if (socialPoints === 100) {
+          regulationPoints++;
+          weekPercent += 2;
+        }
+        break;
+        // use items
+      case 72: // H
+        if (foodCount > 0) {
+          foodCount--;
+          hunger += foodBoost;
+          hunger = constrain(hunger, 0, 100);
+        }
+        break;
+      case 74: // J
+        if (coffeeCount > 0) {
+          coffeeCount--;
+          coffeeUsed = true;
+          coffeeTimer = 0;
+        }
+        break;
+      case 75: // K
+        if (happyJuiceCount > 0) {
+          happyJuiceCount--;
+          happiness += happyJuiceBoost - happyJuiceUsed;
+          happiness = constrain(happiness, 0, 100);
+          happyJuiceUsed++;
+        }
+        break;
+      case 76: // L
+        if (lootboxCount > 0) {
+          lootboxCount--;
+          openLootbox();
+        }
+        break;
+        // buy items
+      case 89: // Y
+        if (money >= foodPrice) {
+          money -= foodPrice;
+          foodCount++;
+        }
+        break;
+      case 85: // U
+        if (money >= coffeePrice) {
+          money -= coffeePrice;
+          coffeeCount++;
+        }
+        break;
+      case 73: // I
+        if (money >= happyJuicePrice) {
+          money -= happyJuicePrice;
+          happyJuiceCount++;
+        }
+        break;
+      case 79: // O
+        if (money >= lootboxPrice) {
+          money -= lootboxPrice;
+          lootboxCount++;
+        }
         break;
       default:
     }
@@ -395,8 +459,13 @@ function buySomething(cost, thingGained, amountGained) {
   }
 }
 
+// when opening a lootbox, how many different items are gained
+// how many of each of those items are gained
 function openLootbox() {
-
+  let numberOfItems;
+  for (let i = 0; i < numberOfItems.length; i++) {
+    numberOfItems[i]
+  }
 }
 
 function levelUp() {
@@ -432,6 +501,13 @@ function timeCode() {
       weekPercent = 0;
     }
   }
+  if (coffeeUsed === true) {
+    coffeeTimer++;
+    if (coffeeTimer >= coffeeCooldown) {
+      coffeeUsed = false;
+    }
+
+  }
 }
 
 function endingCheck() {
@@ -443,7 +519,7 @@ function endingCheck() {
     gameEnded = true;
     endingType = 2;
   }
-  if (regulationPoints === 10) {
+  if (regulationPoints === 100) {
     gameEnded = true;
     endingType = 1;
   }
