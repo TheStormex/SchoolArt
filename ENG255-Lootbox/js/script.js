@@ -61,6 +61,38 @@ let happyJuiceUsed = 0;
 let lootboxBought = 0;
 let lootboxOpened = 0;
 
+// obstacles
+let obstacleWorkUp = false;
+let obstacleWorkTimer = 0;
+let obstacleWorkCooldown = 360;
+let obstacleWorkClicks = 0;
+let obstacleWorkTotalClicks = 1;
+let obstacleBuyUp = false;
+let obstacleBuyTimer = 0;
+let obstacleBuyCooldown = 480;
+let obstacleBuyClicks = 0;
+let obstacleBuyTotalClicks = 2;
+let obstacleUseUp = false;
+let obstacleUseTimer = 0;
+let obstacleUseCooldown = 420;
+let obstacleUseClicks = 0;
+let obstacleUseTotalClicks = 1;
+let obstacleTimeUp = false;
+let obstacleTimeTimer = 0;
+let obstacleTimeCooldown = 600;
+let obstacleTimeClicks = 0;
+let obstacleTimeTotalClicks = 3;
+let obstacleStatsUp = false;
+let obstacleStatsTimer = 0;
+let obstacleStatsCooldown = 450;
+let obstacleStatsClicks = 0;
+let obstacleStatsTotalClicks = 1;
+let obstaclePopupUp = false;
+let obstaclePopupTimer = 0;
+let obstaclePopupCooldown = 300;
+let obstaclePopupClicks = 0;
+let obstaclePopupTotalClicks = 1;
+
 
 // lootbox
 // NPC levels and exp
@@ -147,12 +179,14 @@ function draw() {
     windowResized();
     titleWord();
     shopWindow();
+    salesAlert();
     workWindow();
     weekCount();
     playerStats();
     newsWindow();
-    realSkills();
+    socializeAction();
     petition();
+    obstacles();
     framecount++;
   } else if (gameEnded === true) {
     let endingImage;
@@ -224,10 +258,10 @@ function shopWindow() {
   textAlign(CENTER, CENTER);
   text("Shop", width / 20, height - height / 2.7);
 
-  textSize(width / 100 + height / 100);
-  text("Food", width / 6, height - height / 2.6);
-  text("Coffee", width / 2.8, height - height / 2.6);
-  text("Happy Juice", width - width / 2.5, height - height / 2.6);
+  textSize(width / 50 + height / 50);
+  text("Food", width / 6, height - height / 2.7);
+  text("Coffee", width / 2.8, height - height / 2.7);
+  text("Happy Juice", width - width / 2.5, height - height / 2.7);
   // extra attention to lootbox if low happiness
   if (happiness < 70) {
     textSize(width / 60 + height / 60);
@@ -235,11 +269,25 @@ function shopWindow() {
   if (happiness < 40) {
     fill(255, 0, 0);
   }
-  text("Lootbox", width - width / 6, height - height / 2.6);
-  // food
-  fill(255, 200, 0);
+  text("Lootbox", width - width / 6, height - height / 2.7);
   fill(0);
-
+  textSize(width / 80 + height / 80);
+  // food
+  text("Buy for " + foodPrice + " $ (Y)", width / 6, height - height / 4);
+  text("Use 1 (H)", width / 6, height - height / 8);
+  text("You have " + foodCount, width / 6, height - height / 12);
+  // coffee
+  text("Buy for " + coffeePrice + " $ (Y)", width / 6, height - height / 4);
+  text("Use 1 (H)", width / 6, height - height / 8);
+  text("You have " + coffeeCount, width / 6, height - height / 12);
+  // juice
+  text("Buy for " + happyJuicePrice + " $ (Y)", width / 6, height - height / 4);
+  text("Use 1 (H)", width / 6, height - height / 8);
+  text("You have " + happyJuiceCount, width / 6, height - height / 12);
+  // lootbox
+  text("Buy for " + lootboxPrice + " $ (Y)", width / 6, height - height / 4);
+  text("Use 1 (H)", width / 6, height - height / 8);
+  text("You have " + lootboxPrice, width / 6, height - height / 12);
 }
 
 function workWindow() {
@@ -312,14 +360,15 @@ function salesAlert() {
   textSize(width / 50 + height / 50);
   textAlign(CENTER, CENTER);
   fill(255, 0, 0);
-  text("LOOTBOX SALES! Until end of week!", width - width / 7, height / 6);
+  text("LOOTBOX SALES!", width - width / 7, height / 6);
+  text("Until end of week!", width - width / 7, height / 4.5);
 }
 
-function realSkills() {
+function socializeAction() {
   fill(0);
   textSize(width / 100 + height / 100);
-  textAlign(LEFT, CENTER);
-
+  textAlign(CENTER, CENTER);
+  text("Take time off to socialize (M) for 20$", width - width / 2.2, height / 30);
 }
 
 function petition() {
@@ -336,6 +385,73 @@ function petition() {
     text("Keep consumers addicted for profit", width - width / 10, height - height / 2.1);
     text("Your social circle created a petition", width - width / 10, height - height / 2.2);
     text("to regulate the market", width - width / 10, height - height / 2.3);
+  }
+}
+
+// draw obstacles
+function obstacles() {
+  // work
+  if (obstacleWorkUp === true) {
+    fill(0);
+    rectMode(LEFT, CENTER);
+    rect(width / 2.8, height / 4, width / 2.8, height / 2.7);
+    fill(255);
+    textSize(width / 20 + height / 20);
+    textAlign(CENTER, CENTER);
+    text("Z", width / 2.8, height / 4);
+  }
+  // buy
+  if (obstacleBuyUp === true) {
+    fill(0);
+    rectMode(LEFT, CENTER);
+    rect(width / 3, height - height / 3.5, width - width / 5, height / 4);
+    fill(255);
+    textSize(width / 20 + height / 20);
+    textAlign(CENTER, CENTER);
+    text("X", width / 3, height - height / 3.5);
+  }
+  // use
+  if (obstacleUseUp === true) {
+    fill(0);
+    rectMode(LEFT, CENTER);
+    rect(width / 3, height - height / 10, width - width / 5, height / 5);
+    fill(255);
+    textSize(width / 20 + height / 20);
+    textAlign(CENTER, CENTER);
+    text("C", width / 3, height - height / 10);
+  } // time
+  if (obstacleTimeUp === true) {
+    fill(0);
+    rectMode(LEFT, CENTER);
+    rect(width / 2.7, height / 30, width / 5, height / 20);
+    fill(255);
+    textSize(width / 80 + height / 80);
+    textAlign(CENTER, CENTER);
+    text("V", width / 2.7, height / 30);
+  } // stats
+  if (obstacleStatsUp === true) {
+    fill(0);
+    rectMode(LEFT, CENTER);
+    rect(width / 11, height / 4, width / 6, height / 2.7);
+    fill(255);
+    textSize(width / 20 + height / 20);
+    textAlign(CENTER, CENTER);
+    text("B", width / 11, height / 4);
+  } // popup
+  if (obstaclePopupUp === true) {
+    fill(0);
+    rectMode(CENTER, CENTER);
+    rect(width / 12, height / 2.8, width / 7, height / 7);
+    fill(255);
+    textSize(width / 20 + height / 20);
+    text("N", width / 18, height / 2.7);
+    fill(255, 0, 0);
+    textSize(width / 20 + height / 20);
+    textAlign(CENTER, CENTER);
+    let xLocation = random(width);
+    let yLocation = random(height);
+    text("LOOTBOX!", xLocation, yLocation);
+
   }
 }
 
@@ -434,6 +550,66 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
           lootboxCount++;
         }
         break;
+      case 77: // M, socialize
+        if (money >= 20) {
+          money -= 20;
+          happiness += 4+round(socialPoints/2);
+          happiness = constrain(happiness, 0 , 100);
+          weekPercent += 20;
+          socialPoints += 5;
+          socialPoints = constrain(socialPoints, 0, 100);
+        }
+
+        break;
+        // if the obstacles are present
+      case 90: // Z, work
+        if (obstacleWorkUp === true) {
+          obstacleWorkClicks++;
+          if (obstacleWorkClicks >= obstacleWorkTotalClicks) {
+            obstacleWorkUp = false;
+          }
+        }
+        break;
+      case 88: // X, buy
+        if (obstacleBuyUp === true) {
+          obstacleBuyClicks++;
+          if (obstacleWorkClicks >= obstacleBuyTotalClicks) {
+            obstacleBuyUp = false;
+          }
+        }
+        break;
+      case 67: // C, use
+        if (obstacleUsekUp === true) {
+          obstacleUseClicks++;
+          if (obstacleUseClicks >= obstacleUseTotalClicks) {
+            obstacleUseUp = false;
+          }
+        }
+        break;
+      case 86: // V, time
+        if (obstacleTimeUp === true) {
+          obstacleTimeClicks++;
+          if (obstacleTimeClicks >= obstacleTimeTotalClicks) {
+            obstacleTimeUp = false;
+          }
+        }
+        break;
+      case 66: // B, stats
+        if (obstacleStatsUp === true) {
+          obstacleStatsClicks++;
+          if (obstacleStatsClicks >= obstacleStatsTotalClicks) {
+            obstacleStatsUp = false;
+          }
+        }
+        break;
+      case 78: // N, popup
+        if (obstaclePopupUp === true) {
+          obstaclePopupClicks++;
+          if (obstaclePopupClicks >= obstaclePopupTotalClicks) {
+            obstaclePopupUp = false;
+          }
+        }
+        break;
       default:
     }
   }
@@ -464,7 +640,7 @@ function buySomething(cost, thingGained, amountGained) {
 function openLootbox() {
   let numberOfItems;
   for (let i = 0; i < numberOfItems.length; i++) {
-    numberOfItems[i]
+    numberOfItems[i];
   }
 }
 
@@ -506,8 +682,8 @@ function timeCode() {
     if (coffeeTimer >= coffeeCooldown) {
       coffeeUsed = false;
     }
-
   }
+
 }
 
 function endingCheck() {
@@ -523,17 +699,19 @@ function endingCheck() {
     gameEnded = true;
     endingType = 1;
   }
-  if (week === 5) {
+  if (week >= 5) {
     if (playerLevel < 4) {
+      gameEnded = true;
       endingType = 3;
     }
   }
-  if (week === 5) {
-    if (playerLevel < 4) {
+  if (week >= 10) {
+    if (playerLevel < 6) {
+      gameEnded = true;
       endingType = 3;
     }
   }
-  if (week === 15 && weekPercent === 100) {
+  if (week >= 15 && weekPercent === 100) {
     gameEnded = true;
     if (playerLevel === 10) {
       if (playerRegulationPoints >= 3) {
