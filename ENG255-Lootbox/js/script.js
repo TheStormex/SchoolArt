@@ -43,6 +43,7 @@ let coffeePrice = 8;
 let happyJuicePrice = 15;
 // let luckBoostPrice = 5;
 let lootboxPrice = 10;
+let lootboxSalesPrice = 5;
 // let lotteryPrice = 20;
 // let cookingPrice = 30;
 let socializePrice = 30;
@@ -60,36 +61,37 @@ let happyJuiceBoost = 30;
 let happyJuiceUsed = 0;
 let lootboxBought = 0;
 let lootboxOpened = 0;
+let numberOfItems;
 
 // obstacles
 let obstacleWorkUp = false;
 let obstacleWorkTimer = 0;
-let obstacleWorkCooldown = 360;
+let obstacleWorkCooldown = 60 * 30;
 let obstacleWorkClicks = 0;
 let obstacleWorkTotalClicks = 1;
 let obstacleBuyUp = false;
 let obstacleBuyTimer = 0;
-let obstacleBuyCooldown = 480;
+let obstacleBuyCooldown = 60 * 32;
 let obstacleBuyClicks = 0;
-let obstacleBuyTotalClicks = 2;
+let obstacleBuyTotalClicks = 1;
 let obstacleUseUp = false;
 let obstacleUseTimer = 0;
-let obstacleUseCooldown = 420;
+let obstacleUseCooldown = 60 * 25;
 let obstacleUseClicks = 0;
 let obstacleUseTotalClicks = 1;
 let obstacleTimeUp = false;
 let obstacleTimeTimer = 0;
-let obstacleTimeCooldown = 600;
+let obstacleTimeCooldown = 60 * 28;
 let obstacleTimeClicks = 0;
-let obstacleTimeTotalClicks = 3;
+let obstacleTimeTotalClicks = 1;
 let obstacleStatsUp = false;
 let obstacleStatsTimer = 0;
-let obstacleStatsCooldown = 450;
+let obstacleStatsCooldown = 60 * 33;
 let obstacleStatsClicks = 0;
 let obstacleStatsTotalClicks = 1;
 let obstaclePopupUp = false;
 let obstaclePopupTimer = 0;
-let obstaclePopupCooldown = 300;
+let obstaclePopupCooldown = 60 * 26;
 let obstaclePopupClicks = 0;
 let obstaclePopupTotalClicks = 1;
 
@@ -124,8 +126,8 @@ let newsText = 6;
 let newsTextList = [
   "At the end of this week, the worst performing employee will be fired.",
   "Luckily, due to good performance, no one needs to be fired this time.",
-  "Lootboxes are on sale this week! Support our business and be happy!",
-  "Support our business! Do not support that rediculous peition!",
+  "Lootboxes are on sale this weekend! Support our business and be happy!",
+  "Support our business! Do not support that ridiculous peition!",
   "Keep up the good work! You are bringing joy to all!",
   "Satisfy your needs today! Lootboxes just a click away!",
   "Good luck on your first week! Make the boss proud!"
@@ -187,6 +189,7 @@ function draw() {
     socializeAction();
     petition();
     obstacles();
+    lastLootbox();
     framecount++;
   } else if (gameEnded === true) {
     let endingImage;
@@ -273,21 +276,32 @@ function shopWindow() {
   fill(0);
   textSize(width / 80 + height / 80);
   // food
+  text("Restore Hunger", width / 6, height - height / 3.5);
   text("Buy for " + foodPrice + " $ (Y)", width / 6, height - height / 4);
   text("Use 1 (H)", width / 6, height - height / 8);
   text("You have " + foodCount, width / 6, height - height / 12);
   // coffee
-  text("Buy for " + coffeePrice + " $ (Y)", width / 6, height - height / 4);
-  text("Use 1 (H)", width / 6, height - height / 8);
-  text("You have " + coffeeCount, width / 6, height - height / 12);
+  text("Work Faster for 2 seconds", width / 2.8, height - height / 3.5);
+  text("Buy for " + coffeePrice + " $ (U)", width / 2.8, height - height / 4);
+  text("Use 1 (J)", width / 2.8, height - height / 8);
+  text("You have " + coffeeCount, width / 2.8, height - height / 12);
   // juice
-  text("Buy for " + happyJuicePrice + " $ (Y)", width / 6, height - height / 4);
-  text("Use 1 (H)", width / 6, height - height / 8);
-  text("You have " + happyJuiceCount, width / 6, height - height / 12);
+  text("Restore Happiness", width - width / 2.5, height - height / 3.5);
+  text("Buy for " + happyJuicePrice + " $ (I)", width - width / 2.5, height - height / 4);
+  text("Use 1 (K)", width - width / 2.5, height - height / 8);
+  text("You have " + happyJuiceCount, width - width / 2.5, height - height / 12);
   // lootbox
-  text("Buy for " + lootboxPrice + " $ (Y)", width / 6, height - height / 4);
-  text("Use 1 (H)", width / 6, height - height / 8);
-  text("You have " + lootboxPrice, width / 6, height - height / 12);
+  text("Can be anything!", width - width / 6, height - height / 3.5);
+  if (weekPercent >= 80) {
+    fill(255, 0, 0);
+    text("Buy for " + lootboxSalesPrice + " $ (O)", width - width / 6, height - height / 4);
+  } else {
+    fill(0);
+    text("Buy for " + lootboxPrice + " $ (O)", width - width / 6, height - height / 4);
+  }
+  fill(0);
+  text("Use 1 (L)", width - width / 6, height - height / 8);
+  text("You have " + lootboxCount, width - width / 6, height - height / 12);
 }
 
 function workWindow() {
@@ -350,18 +364,40 @@ function newsWindow() {
   textSize(width / 100 + height / 100);
   textAlign(LEFT, CENTER);
   // what news should play?
+  let genericTextNumber = round(random(1));
+  let genericText;
+  if (genericTextNumber === 0) {
+    genericText = 2;
+  } else {
+    genericText = 4;
+  }
+  newsText= genericText;
   if (week === 1) {
     newsText = 6;
+  }
+  if (weekPercent >= 80) {
+    newsText = 2;
+  }
+  if (socialPoints >= 100) {
+    newsText = 3;
+  }
+  if (week === 5 || week === 10 || week === 15) {
+    newsText = 0;
+  }
+  if (week === 6 || week === 11) {
+    newsText = 1;
   }
   text(newsTextList[newsText], width / 12, height / 2.1);
 }
 
 function salesAlert() {
-  textSize(width / 50 + height / 50);
-  textAlign(CENTER, CENTER);
-  fill(255, 0, 0);
-  text("LOOTBOX SALES!", width - width / 7, height / 6);
-  text("Until end of week!", width - width / 7, height / 4.5);
+  if (weekPercent >= 80) {
+    textSize(width / 50 + height / 50);
+    textAlign(CENTER, CENTER);
+    fill(255, 0, 0);
+    text("LOOTBOX SALES!", width - width / 7, height / 30);
+    text("Until end of week!", width - width / 7, height / 12);
+  }
 }
 
 function socializeAction() {
@@ -386,6 +422,17 @@ function petition() {
     text("Your social circle created a petition", width - width / 10, height - height / 2.2);
     text("to regulate the market", width - width / 10, height - height / 2.3);
   }
+}
+
+function lastLootbox() {
+  fill(255, 200, 0);
+  rectMode(CENTER, CENTER);
+  rect(width - width / 3, height / 4, width / 5, height / 2.7);
+  fill(0);
+  textSize(width / 80 + height / 80);
+  textAlign(CENTER, CENTER);
+  text("Last Lootbox", width - width / 3, height / 3 - height / 4.2);
+
 }
 
 // draw obstacles
@@ -423,11 +470,11 @@ function obstacles() {
   if (obstacleTimeUp === true) {
     fill(0);
     rectMode(LEFT, CENTER);
-    rect(width / 2.7, height / 30, width / 5, height / 20);
+    rect(width / 2.1, height / 30, width / 2.4, height / 20);
     fill(255);
     textSize(width / 80 + height / 80);
     textAlign(CENTER, CENTER);
-    text("V", width / 2.7, height / 30);
+    text("V", width / 2.1, height / 30);
   } // stats
   if (obstacleStatsUp === true) {
     fill(0);
@@ -441,10 +488,10 @@ function obstacles() {
   if (obstaclePopupUp === true) {
     fill(0);
     rectMode(CENTER, CENTER);
-    rect(width / 12, height / 2.8, width / 7, height / 7);
+    rect(width / 2.6, height - height / 2.05, width - width / 5.4, height / 7);
     fill(255);
     textSize(width / 20 + height / 20);
-    text("N", width / 18, height / 2.7);
+    text("N", width / 2.6, height - height / 2.05);
     fill(255, 0, 0);
     textSize(width / 20 + height / 20);
     textAlign(CENTER, CENTER);
@@ -470,21 +517,23 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
     }
   }
   if (isWorkKey === true) {
-    if (keyCode === workLettersList[workLetter]) {
-      if (coffeeUsed === true) {
-        productivity += coffeeBoost;
+    if (obstacleWorkUp === false) {
+      if (keyCode === workLettersList[workLetter]) {
+        if (coffeeUsed === true) {
+          productivity += coffeeBoost;
+        } else {
+          productivity = productivityBase;
+        }
+        money += (moneyPerLevel[playerLevel - 1]) * productivity;
+        playerExp += (expPerLevel[playerLevel - 1]) * productivity;
+        workLetter = round(random(9));
       } else {
-        productivity = productivityBase;
-      }
-      money += (moneyPerLevel[playerLevel - 1]) * productivity;
-      playerExp += (expPerLevel[playerLevel - 1]) * productivity;
-      workLetter = round(random(9));
-    } else {
-      // if work key not the right one, lose
-      money -= moneyPerLevel[playerLevel - 1];
-      happiness--;
-      if (money < 0) {
-        money = 0;
+        // if work key not the right one, lose
+        money -= moneyPerLevel[playerLevel - 1];
+        happiness--;
+        if (money < 0) {
+          money = 0;
+        }
       }
     }
   } else {
@@ -498,25 +547,31 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
         break;
         // use items
       case 72: // H
-        if (foodCount > 0) {
-          foodCount--;
-          hunger += foodBoost;
-          hunger = constrain(hunger, 0, 100);
+        if (obstacleUseUp === false) {
+          if (foodCount > 0) {
+            foodCount--;
+            hunger += foodBoost;
+            hunger = constrain(hunger, 0, 100);
+          }
         }
         break;
       case 74: // J
-        if (coffeeCount > 0) {
-          coffeeCount--;
-          coffeeUsed = true;
-          coffeeTimer = 0;
+        if (obstacleUseUp === false) {
+          if (coffeeCount > 0) {
+            coffeeCount--;
+            coffeeUsed = true;
+            coffeeTimer = 0;
+          }
         }
         break;
       case 75: // K
-        if (happyJuiceCount > 0) {
-          happyJuiceCount--;
-          happiness += happyJuiceBoost - happyJuiceUsed;
-          happiness = constrain(happiness, 0, 100);
-          happyJuiceUsed++;
+        if (obstacleUseUp === false) {
+          if (happyJuiceCount > 0) {
+            happyJuiceCount--;
+            happiness += happyJuiceBoost - happyJuiceUsed;
+            happiness = constrain(happiness, 0, 100);
+            happyJuiceUsed++;
+          }
         }
         break;
       case 76: // L
@@ -527,39 +582,55 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
         break;
         // buy items
       case 89: // Y
-        if (money >= foodPrice) {
-          money -= foodPrice;
-          foodCount++;
+        if (obstacleBuyUp === false) {
+          if (money >= foodPrice) {
+            money -= foodPrice;
+            foodCount++;
+          }
         }
         break;
       case 85: // U
-        if (money >= coffeePrice) {
-          money -= coffeePrice;
-          coffeeCount++;
+        if (obstacleBuyUp === false) {
+          if (money >= coffeePrice) {
+            money -= coffeePrice;
+            coffeeCount++;
+          }
         }
         break;
       case 73: // I
-        if (money >= happyJuicePrice) {
-          money -= happyJuicePrice;
-          happyJuiceCount++;
+        if (obstacleBuyUp === false) {
+          if (money >= happyJuicePrice) {
+            money -= happyJuicePrice;
+            happyJuiceCount++;
+          }
         }
         break;
       case 79: // O
-        if (money >= lootboxPrice) {
-          money -= lootboxPrice;
-          lootboxCount++;
+        if (weekPercent >= 80) {
+          if (money >= lootboxSalesPrice) {
+            money -= lootboxSalesPrice;
+            lootboxCount++;
+            lootboxBought++;
+          }
+        } else {
+          if (money >= lootboxPrice) {
+            money -= lootboxPrice;
+            lootboxCount++;
+            lootboxBought++;
+          }
         }
         break;
       case 77: // M, socialize
-        if (money >= 20) {
-          money -= 20;
-          happiness += 4+round(socialPoints/2);
-          happiness = constrain(happiness, 0 , 100);
-          weekPercent += 20;
-          socialPoints += 5;
-          socialPoints = constrain(socialPoints, 0, 100);
+        if (obstacleTimeUp === false) {
+          if (money >= 20) {
+            money -= 20;
+            happiness += 3 + round(socialPoints / 2);
+            happiness = constrain(happiness, 0, 100);
+            weekPercent += 20;
+            socialPoints += 5;
+            socialPoints = constrain(socialPoints, 0, 100);
+          }
         }
-
         break;
         // if the obstacles are present
       case 90: // Z, work
@@ -567,22 +638,28 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
           obstacleWorkClicks++;
           if (obstacleWorkClicks >= obstacleWorkTotalClicks) {
             obstacleWorkUp = false;
+            obstacleWorkTimer = 0;
+            obstacleWorkTotalClicks = round(random(2)) + 1;
           }
         }
         break;
       case 88: // X, buy
         if (obstacleBuyUp === true) {
           obstacleBuyClicks++;
-          if (obstacleWorkClicks >= obstacleBuyTotalClicks) {
+          if (obstacleBuyClicks >= obstacleBuyTotalClicks) {
             obstacleBuyUp = false;
+            obstacleBuyTimer = 0;
+            obstacleBuyTotalClicks = round(random(2)) + 1;
           }
         }
         break;
       case 67: // C, use
-        if (obstacleUsekUp === true) {
+        if (obstacleUseUp === true) {
           obstacleUseClicks++;
           if (obstacleUseClicks >= obstacleUseTotalClicks) {
             obstacleUseUp = false;
+            obstacleUseTimer = 0;
+            obstacleUseTotalClicks = round(random(2)) + 1;
           }
         }
         break;
@@ -591,6 +668,8 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
           obstacleTimeClicks++;
           if (obstacleTimeClicks >= obstacleTimeTotalClicks) {
             obstacleTimeUp = false;
+            obstacleTimeTimer = 0;
+            obstacleTimeTotalClicks = round(random(2)) + 1;
           }
         }
         break;
@@ -599,6 +678,8 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
           obstacleStatsClicks++;
           if (obstacleStatsClicks >= obstacleStatsTotalClicks) {
             obstacleStatsUp = false;
+            obstacleStatsTimer = 0;
+            obstacleStatsTotalClicks = round(random(2)) + 1;
           }
         }
         break;
@@ -607,6 +688,8 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
           obstaclePopupClicks++;
           if (obstaclePopupClicks >= obstaclePopupTotalClicks) {
             obstaclePopupUp = false;
+            obstaclePopupTimer = 0;
+            obstaclePopupTotalClicks = round(random(2)) + 1;
           }
         }
         break;
@@ -638,7 +721,8 @@ function buySomething(cost, thingGained, amountGained) {
 // when opening a lootbox, how many different items are gained
 // how many of each of those items are gained
 function openLootbox() {
-  let numberOfItems;
+  lootboxOpened++;
+  numberOfItems = round(random(4));
   for (let i = 0; i < numberOfItems.length; i++) {
     numberOfItems[i];
   }
@@ -657,7 +741,7 @@ function levelUp() {
 
 function timeCode() {
   happinessTimer++;
-  if (happinessTimer >= happinessCooldown) {
+  if (happinessTimer >= (happinessCooldown + socialPoints * 5 - lootboxOpened * 5)) {
     happiness--;
     happinessTimer = 0;
   }
@@ -683,7 +767,49 @@ function timeCode() {
       coffeeUsed = false;
     }
   }
-
+  // obstale timers, wait until time to turn it on
+  if (obstacleWorkUp === false) {
+    obstacleWorkTimer++;
+    obstacleWorkClicks = 0;
+    if (obstacleWorkTimer >= (obstacleWorkCooldown + socialPoints * 4 - week * 30)) {
+      obstacleWorkUp = true;
+    }
+  }
+  if (obstacleBuyUp === false) {
+    obstacleBuyTimer++;
+    obstacleBuyClicks = 0;
+    if (obstacleBuyTimer >= (obstacleBuyCooldown + socialPoints * 4 - week * 30)) {
+      obstacleBuyUp = true;
+    }
+  }
+  if (obstacleUseUp === false) {
+    obstacleUseTimer++;
+    obstacleUseClicks = 0;
+    if (obstacleUseTimer >= (obstacleUseCooldown + socialPoints * 4 - week * 30)) {
+      obstacleUseUp = true;
+    }
+  }
+  if (obstacleTimeUp === false) {
+    obstacleTimeTimer++;
+    obstacleTimeClicks = 0;
+    if (obstacleTimeTimer >= (obstacleTimeCooldown + socialPoints * 4 - week * 30)) {
+      obstacleTimeUp = true;
+    }
+  }
+  if (obstacleStatsUp === false) {
+    obstacleStatsTimer++;
+    obstacleStatsClicks = 0;
+    if (obstacleStatsTimer >= (obstacleStatsCooldown + socialPoints * 4 - week * 30)) {
+      obstacleStatsUp = true;
+    }
+  }
+  if (obstaclePopupUp === false) {
+    obstaclePopupTimer++;
+    obstaclePopupClicks = 0;
+    if (obstaclePopupTimer >= (obstaclePopupCooldown + socialPoints * 4 - week * 30)) {
+      obstaclePopupUp = true;
+    }
+  }
 }
 
 function endingCheck() {
