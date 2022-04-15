@@ -146,15 +146,15 @@ let coffeeCooldown = 120;
 
 function preload() {
   // load images
-  i_ending1 = loadImage(`assets/images/regulations1.png`);
-  i_ending1_2 = loadImage(`assets/images/regulations2.png`);
-  i_ending2 = loadImage(`assets/images/depress.png`);
-  i_ending3 = loadImage(`assets/images/unproduct.png`);
-  i_ending4 = loadImage(`assets/images/starve.png`);
-  i_ending5 = loadImage(`assets/images/disloyal.png`);
-  i_ending6 = loadImage(`assets/images/network.png`);
-  i_ending7 = loadImage(`assets/images/promotion.png`);
-  i_ending8 = loadImage(`assets/images/downsize.png`);
+  i_ending1 = loadImage(`assets/images/regulations1.PNG`);
+  i_ending1_2 = loadImage(`assets/images/regulations2.PNG`);
+  i_ending2 = loadImage(`assets/images/depress.PNG`);
+  i_ending3 = loadImage(`assets/images/unproduct.PNG`);
+  i_ending4 = loadImage(`assets/images/starve.PNG`);
+  i_ending5 = loadImage(`assets/images/disloyal.PNG`);
+  i_ending6 = loadImage(`assets/images/network.PNG`);
+  i_ending7 = loadImage(`assets/images/promotion.PNG`);
+  i_ending8 = loadImage(`assets/images/downsize.PNG`);
 }
 
 function setup() {
