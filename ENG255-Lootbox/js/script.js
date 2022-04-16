@@ -787,7 +787,7 @@ function openLootbox() {
         thisItemQuantity = 2;
       } else if (quantityCode > 80 && quantityCode <= 95) {
         thisItemQuantity = 3;
-      } else if (quantityCode > 95 && quantityCode < 99) {
+      } else if (quantityCode > 95) {
         thisItemQuantity = 4;
       }
       switch (thisItem) {
@@ -849,7 +849,7 @@ function openLootbox() {
         thisItemQuantity = 1;
       } else if (quantityCode > 80 && quantityCode <= 95) {
         thisItemQuantity = 2;
-      } else if (quantityCode > 95 && quantityCode < 99) {
+      } else if (quantityCode > 95 && quantityCode < 98) {
         thisItemQuantity = 3;
       } else {
         thisItemQuantity = 4;
