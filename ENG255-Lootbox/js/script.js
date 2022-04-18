@@ -261,7 +261,7 @@ function instructions() {
   text("from reaching 0", width - width / 9, height / 3 - height / 10);
   text("Survive 15 weeks of work", width - width / 9, height / 3 - height / 15);
   text("Reach level 10 for promotion", width - width / 9, height / 3 - height / 30);
-  text("Stave off addiction", width - width / 9,  height / 2 - height / 6);
+  text("Stave off addiction", width - width / 9, height / 2 - height / 6);
   text("Work as hard as you can", width - width / 9, height / 2 - height / 7.5);
   text("or find another way...", width - width / 9, height / 2 - height / 10);
 }
@@ -610,6 +610,24 @@ function keyPressed() { // 81, 87, 69, 82, 84, 65, 83, 68, 70, 71
       case 76: // L
         if (lootboxCount > 0) {
           lootboxCount--;
+          obstacleWorkUp = false;
+          obstacleWorkTimer = 0;
+          obstacleWorkTotalClicks = round(random(2)) + 1;
+          obstacleBuyUp = false;
+          obstacleBuyTimer = 0;
+          obstacleBuyTotalClicks = round(random(2)) + 1;
+          obstacleUseUp = false;
+          obstacleUseTimer = 0;
+          obstacleUseTotalClicks = round(random(2)) + 1;
+          obstacleTimeUp = false;
+          obstacleTimeTimer = 0;
+          obstacleTimeTotalClicks = round(random(2)) + 1;
+          obstacleStatsUp = false;
+          obstacleStatsTimer = 0;
+          obstacleStatsTotalClicks = round(random(2)) + 1;
+          obstaclePopupUp = false;
+          obstaclePopupTimer = 0;
+          obstaclePopupTotalClicks = round(random(2)) + 1;
           openLootbox();
         }
         break;
