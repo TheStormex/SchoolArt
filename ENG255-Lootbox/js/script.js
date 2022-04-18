@@ -286,7 +286,7 @@ function shopWindow() {
   text("Use 1 (H)", width / 6, height - height / 8);
   text("You have " + foodCount, width / 6, height - height / 12);
   // coffee
-  text("Work Faster for 2 seconds", width / 2.8, height - height / 3.5);
+  text("Work Faster for 5 seconds", width / 2.8, height - height / 3.5);
   text("Buy for " + coffeePrice + " $ (U)", width / 2.8, height - height / 4);
   text("Use 1 (J)", width / 2.8, height - height / 8);
   text("You have " + coffeeCount, width / 2.8, height - height / 12);
